@@ -45,28 +45,6 @@ const getAllTasks = ()=> {
   return tasks;
 }
 
-const Card = (props) => (
-  <li>
-    <h3>Title: { props.card.title }</h3>
-    <p>id: { props.card.id }</p>
-    <p>Priority: { props.card.priority }</p>
-    <p>Status: { props.card.status}</p>
-    <p>Created by: { props.card.created_by}</p>
-    <p>Assigned to: { props.card.assigned_to}</p>
-    <input type="button" onClick={
-      function(){
-        props.next(props.card.id);
-      }
-    } value= { props.card.button }/>
-  </li>
-);
-
-const CardList = ({ cards, next }) =>(
-  <ul>
-    {  cards.map(card => <Card card={card} next={next} /> ) }
-  </ul>
-);
-
 
 //PARENT element
 class App extends React.Component {
@@ -86,6 +64,7 @@ class App extends React.Component {
   // this.getTasks = this.getTasks.bind(this);
   getTasks() {
     const arrayOfTasks = getAllTasks();
+
     this.setState({
       queueTasks: arrayOfTasks.filter(task => task.status === "To Do"),
       progressTasks: arrayOfTasks.filter(task => task.status === "Doing"),
@@ -93,15 +72,18 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.getTasks();
+  }
+
   render() {
+    console.log(this.state);
     return (
       <div id='board'>
         <h1> KANBAN BOARD </h1>
-        <div id='toDo'>
           <Column taskList = {this.state.queueTasks}></Column>
           <Column taskList = {this.state.progressTasks}></Column>
-          <Column taskLIst = {this.state.completedTasks}></Column>
-        </div>
+          <Column taskList = {this.state.completedTasks}></Column>
       </div>
     )
   }
@@ -112,15 +94,21 @@ class Column extends React.Component{
 
   constructor(props){
     super(props);
-    this.updateCards = this.updateCards.bind(this);
-
-    console.log(props);
+    //console.log(this.props);
   }
 
+  // bind here
+  // Render the view of this column
   render(){
+    console.log(this.props);
     return (
-      <div id="queue">
-        <Task></Task>
+      <div class="column">
+        {
+          this.props.taskList.map((task)=>{
+            return <Task task={task}/>
+
+          })
+        }
       </div>
     );
   }
@@ -131,15 +119,16 @@ class Task extends React.Component{
 
   constructor(props){
     super(props);
-
-    this.state = {
-
-    };
+    //console.log(props)
   }
 
+  // Render the view of this task
   render(){
+    console.log(this.props);
     return (
-      <div id="queue">
+      <div class= {this.props.task.status}>
+        <h3>{ this.props.task.assignedTo }</h3>
+        <p>{ this.props.task.title }</p>
 
       </div>
     );
