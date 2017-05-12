@@ -89,51 +89,51 @@ class App extends React.Component {
   }
 }
 
-// Child of App
-class Column extends React.Component{
+// // Child of App
+// class Column extends React.Component{
 
-  constructor(props){
-    super(props);
-    //console.log(this.props);
-  }
+//   constructor(props){
+//     super(props);
+//     //console.log(this.props);
+//   }
 
-  // bind here
-  // Render the view of this column
-  render(){
-    console.log(this.props);
-    return (
-      <div class="column">
-        {
-          this.props.taskList.map((task)=>{
-            return <Task task={task}/>
+//   // bind here
+//   // Render the view of this column
+//   render(){
+//     console.log(this.props);
+//     return (
+//       <div class="column">
+//         {
+//           this.props.taskList.map((task)=>{
+//             return <Task task={task}/>
 
-          })
-        }
-      </div>
-    );
-  }
-};
+//           })
+//         }
+//       </div>
+//     );
+//   }
+// };
 
-//Child of Column
-class Task extends React.Component{
+// //Child of Column
+// class Task extends React.Component{
 
-  constructor(props){
-    super(props);
-    //console.log(props)
-  }
+//   constructor(props){
+//     super(props);
+//     //console.log(props)
+//   }
 
-  // Render the view of this task
-  render(){
-    console.log(this.props);
-    return (
-      <div class= {this.props.task.status}>
-        <h3>{ this.props.task.assignedTo }</h3>
-        <p>{ this.props.task.title }</p>
+//   // Render the view of this task
+//   render(){
+//     console.log(this.props);
+//     return (
+//       <div class= {this.props.task.status}>
+//         <h3>{ this.props.task.assignedTo }</h3>
+//         <p>{ this.props.task.title }</p>
 
-      </div>
-    );
-  }
-};
+//       </div>
+//     );
+//   }
+// };
 
 
 ReactDOM.render(
